@@ -1,0 +1,48 @@
+﻿@model InterviewMVC.Models.Drink
+
+@{
+    ViewBag.Title = "Detalles del Cóctel";
+    Layout = "_Layout";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h3>@Model.StrDrink</h3>
+    <img src="@(Model.StrDrinkThumb + "/preview")" class="img-thumbnail" alt="Imagen del cóctel">
+    <p>ID: @Model.IdDrink</p>
+    <p>Categoria: @Model.StrCategory</p>
+    <p>IBA: @Model.StrIBA</p>
+    <p>Alchoholica: @Model.StrAlcoholic</p>
+    <p>Vaso: @Model.StrGlass</p>
+
+    <p>Ingredientes: </p>
+    <p>@Model.StrMeasure1 @Model.StrIngredient1</p>
+    <p>@Model.StrMeasure2 @Model.StrIngredient2</p>
+    <p>@Model.StrMeasure3 @Model.StrIngredient3</p>
+    <p>@Model.StrMeasure4 @Model.StrIngredient4</p>
+    <p>@Model.StrMeasure5 @Model.StrIngredient5</p>
+    <p>@Model.StrMeasure6 @Model.StrIngredient6</p>
+    <p>@Model.StrMeasure7 @Model.StrIngredient7</p>
+    <p>@Model.StrMeasure8 @Model.StrIngredient8</p>
+    <p>@Model.StrMeasure9 @Model.StrIngredient9</p>
+    <p>@Model.StrMeasure10 @Model.StrIngredient10</p>
+    <p>@Model.StrMeasure11 @Model.StrIngredient11</p>
+    <p>@Model.StrMeasure12 @Model.StrIngredient12</p>
+    <p>@Model.StrMeasure13 @Model.StrIngredient13</p>
+    <p>@Model.StrMeasure14 @Model.StrIngredient14</p>
+    <p>@Model.StrMeasure15 @Model.StrIngredient15</p>
+    
+    <p>@Model.StrInstructionsES</p>
+    @{
+        var tagList = Model.GetTags();
+        foreach (var item in tagList)
+        {
+            <span class="badge bg-primary">@item</span>
+        }
+    }
+    
+</div>
+
+    
+    
