@@ -30,6 +30,18 @@ public class DrinkController (ICocktailDbService cocktailDbService) : Controller
 
     }
     
+    [HttpGet]
+    public async Task<ActionResult> DetailPopUp(string idDrink)
+    {
+        var drinkToShow = DrinkList.SearchResults.FirstOrDefault(d => d.IdDrink == idDrink) ?? new Drink();
+        if (!_searchByName && !string.IsNullOrWhiteSpace(drinkToShow.IdDrink))
+        {
+            drinkToShow = await cocktailDbService.GetDrinkById(drinkToShow.IdDrink);
+        }
+        drinkToShow?.GetTags();
+        return PartialView("Detail", drinkToShow);
+    }
+    
     [HttpPost]
     public async Task<IActionResult> Search(string drinkName)
     {
@@ -50,7 +62,7 @@ public class DrinkController (ICocktailDbService cocktailDbService) : Controller
     public IActionResult AddDrink(string idDrink)
     {
         var drinkToAdd = DrinkList.SearchResults.FirstOrDefault(d => d.IdDrink == idDrink);
-        if (drinkToAdd != null)
+        if (drinkToAdd is not null)
         {
             DrinkList.AddedDrinks.Add(drinkToAdd);    
         }
@@ -61,7 +73,7 @@ public class DrinkController (ICocktailDbService cocktailDbService) : Controller
     public IActionResult RemoveDrink(string idDrink)
     {
         var drinkToRemove = DrinkList.AddedDrinks.FirstOrDefault(d => d.IdDrink == idDrink);
-        if (drinkToRemove != null)
+        if (drinkToRemove is not null)
         {
             DrinkList.AddedDrinks.Remove(drinkToRemove);    
         }
@@ -83,6 +95,7 @@ public class DrinkController (ICocktailDbService cocktailDbService) : Controller
         _searchByName = false;
         return View("Index", DrinkList);
     }
+    
     
     
 }
